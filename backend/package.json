@@ -1,0 +1,13 @@
+{
+  "name": "belege-scanner-server",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server_express.js",
+    "local": "node server_local.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongodb": "^7.3.0"
+  }
+}
