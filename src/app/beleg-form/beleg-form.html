@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">Neuer Beleg</mat-toolbar>
+<mat-toolbar color="primary">{{ id() ? 'Beleg bearbeiten' : 'Neuen Beleg anlegen' }}</mat-toolbar>
 
 @if (zeigeFormular()) {
   @if (foto()) {
@@ -43,12 +43,5 @@
     </div>
   </form>
 } @else {
-  <div class="kamera">
-    <video #video autoplay playsinline></video>
-    <button matButton="filled" (click)="fotoAufnehmen()">
-      <mat-icon>photo_camera</mat-icon> Foto aufnehmen
-    </button>
-  </div>
+  <app-kamera (fotoAufgenommen)="fotoGesetzt($event)" (abgebrochen)="weiterOhneFoto()" />
 }
-
-<canvas #canvas hidden></canvas>

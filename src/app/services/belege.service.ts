@@ -24,4 +24,8 @@ export class BelegeService {
   loeschen(id: string) {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
+
+  getBeleg(id: string){
+    return this.http.get<Beleg>(`${this.url}/${id}`)
+  }
 }

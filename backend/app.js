@@ -14,6 +14,16 @@ function createApp() {
     res.json(belege);
   });
 
+  app.get('/api/belege/:id', async (req, res) => {
+    const belegId = new ObjectId(req.params.id);
+    const beleg = await getDb().collection('belege').findOne({ _id: belegId });
+    if (!beleg) {
+      res.status(404).json({ error: 'Beleg nicht gefunden' });
+    } else {
+      res.json(beleg);
+    }
+  });
+
   app.post('/api/belege', async (req, res) => {
     const neuerBeleg = req.body;
     await getDb().collection('belege').insertOne(neuerBeleg);
