@@ -10,6 +10,7 @@ import {BelegeService} from '../services/belege.service';
 import {MatDialog} from '@angular/material/dialog';
 import {LoeschDialog} from './loesch-dialog';
 import {MatIcon} from '@angular/material/icon';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-beleg',
@@ -23,6 +24,7 @@ export class Beleg implements OnInit {
   private service = inject(BelegeService);
   private router = inject(Router);
   private dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
 
   id = input<string>();
 
@@ -66,6 +68,7 @@ export class Beleg implements OnInit {
     const anfrage = id ? this.service.aendern(id, beleg) : this.service.anlegen(beleg);
     anfrage.subscribe(() => {
       this.service.laden();
+      this.snackBar.open('Beleg gespeichert', undefined, { duration: 3000 });
       this.router.navigate(['/']);
     });
   }
@@ -81,6 +84,7 @@ export class Beleg implements OnInit {
       if (bestaetigt) {
         this.service.loeschen(id).subscribe(() => {
           this.service.laden();
+          this.snackBar.open('Beleg gelöscht', undefined, { duration: 3000 });
           this.router.navigate(['/']);
         });
       }
