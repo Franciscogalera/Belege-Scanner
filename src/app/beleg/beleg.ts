@@ -7,18 +7,22 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {Kamera} from '../kamera/kamera';
 import {BelegeService} from '../services/belege.service';
+import {MatDialog} from '@angular/material/dialog';
+import {LoeschDialog} from './loesch-dialog';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
-  selector: 'app-beleg-form',
-  imports: [ReactiveFormsModule, RouterLink, MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, Kamera],
-  templateUrl: './beleg-form.html',
-  styleUrl: './beleg-form.scss',
+  selector: 'app-beleg',
+  imports: [ReactiveFormsModule, RouterLink, MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, Kamera, MatIcon],
+  templateUrl: './beleg.html',
+  styleUrl: './beleg.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BelegForm implements OnInit {
+export class Beleg implements OnInit {
   private fb = inject(FormBuilder);
   private service = inject(BelegeService);
   private router = inject(Router);
+  private dialog = inject(MatDialog);
 
   id = input<string>();
 
@@ -63,6 +67,23 @@ export class BelegForm implements OnInit {
     anfrage.subscribe(() => {
       this.service.laden();
       this.router.navigate(['/']);
+    });
+  }
+  loeschen() {
+    const id = this.id();
+    if (!id) {
+      return;
+    }
+    const ref = this.dialog.open(LoeschDialog, {
+      data: { name: this.form.value.rechnungssteller },
+    });
+    ref.afterClosed().subscribe(bestaetigt => {
+      if (bestaetigt) {
+        this.service.loeschen(id).subscribe(() => {
+          this.service.laden();
+          this.router.navigate(['/']);
+        });
+      }
     });
   }
 }

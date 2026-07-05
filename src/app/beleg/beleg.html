@@ -38,6 +38,13 @@
     </mat-form-field>
 
     <div class="aktionen">
+      @if (id()) {
+        @if (id()) {
+          <button matButton (click)="loeschen()" type="button" style="color: var(--mat-sys-error)">
+            <mat-icon>delete</mat-icon> Löschen
+          </button>
+        }
+      }
       <button matButton routerLink="/" type="button">Abbrechen</button>
       <button matButton="filled" type="submit">Speichern</button>
     </div>
