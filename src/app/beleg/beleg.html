@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">{{ id() ? 'Beleg bearbeiten' : 'Neuen Beleg anlegen' }}</mat-toolbar>
+<mat-toolbar>{{ id() ? 'Beleg bearbeiten' : 'Neuen Beleg anlegen' }}</mat-toolbar>
 
 @if (zeigeFormular()) {
   @if (foto()) {
@@ -26,7 +26,7 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Datum</mat-label>
-      <input matInput formControlName="datum" placeholder="TT.MM.JJJJ" required />
+      <input matInput type="date" formControlName="datum" required />
       @if (form.controls.datum.hasError('required')) {
         <mat-error>Datum ist erforderlich</mat-error>
       }
@@ -38,12 +38,10 @@
     </mat-form-field>
 
     <div class="aktionen">
-      @if (id()) {
         @if (id()) {
           <button matButton (click)="loeschen()" type="button" style="color: var(--mat-sys-error)">
             <mat-icon>delete</mat-icon> Löschen
           </button>
-        }
       }
       <button matButton routerLink="/" type="button">Abbrechen</button>
       <button matButton="filled" type="submit">Speichern</button>

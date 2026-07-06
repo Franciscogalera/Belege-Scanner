@@ -7,7 +7,7 @@
 @for (beleg of belege(); track beleg._id) {
 <a mat-list-item [routerLink]="['/beleg', beleg._id]">
   <span matListItemTitle>{{ beleg.rechnungssteller }}</span>
-  <span matListItemLine>{{ beleg.betrag }} € — {{ beleg.datum }}</span>
+  <span matListItemLine>{{ beleg.betrag }} € — {{ beleg.datum | date:'dd.MM.yyyy' }}</span>
 </a>
 }
 </mat-nav-list>
