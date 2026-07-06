@@ -66,10 +66,18 @@ export class Beleg implements OnInit {
     const beleg = {...this.form.getRawValue(), foto: this.foto() ?? undefined};
     const id = this.id();
     const anfrage = id ? this.service.aendern(id, beleg) : this.service.anlegen(beleg);
-    anfrage.subscribe(() => {
-      this.service.laden();
-      this.snackBar.open('Beleg gespeichert', undefined, { duration: 3000 });
-      this.router.navigate(['/']);
+    anfrage.subscribe({
+      next: () => {
+        this.service.laden();
+        this.snackBar.open('Beleg gespeichert', undefined, { duration: 3000 });
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        this.snackBar.open('Speichern fehlgeschlagen', undefined, {
+          duration: 4000,
+          panelClass: 'snackbar-error',
+        });
+      },
     });
   }
   loeschen() {
@@ -82,10 +90,18 @@ export class Beleg implements OnInit {
     });
     ref.afterClosed().subscribe(bestaetigt => {
       if (bestaetigt) {
-        this.service.loeschen(id).subscribe(() => {
-          this.service.laden();
-          this.snackBar.open('Beleg gelöscht', undefined, { duration: 3000 });
-          this.router.navigate(['/']);
+        this.service.loeschen(id).subscribe({
+          next: () => {
+            this.service.laden();
+            this.snackBar.open('Beleg gelöscht', undefined, { duration: 3000 });
+            this.router.navigate(['/']);
+          },
+          error: () => {
+            this.snackBar.open('Löschen fehlgeschlagen', undefined, {
+              duration: 4000,
+              panelClass: 'snackbar-error',
+            });
+          },
         });
       }
     });
