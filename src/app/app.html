@@ -1,4 +1,6 @@
 
 
-
+@if (!isOnline()) {
+  <div class="offline-banner">Offline – du siehst gespeicherte Daten</div>
+}
 <router-outlet />
