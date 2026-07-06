@@ -31,6 +31,9 @@ export class Beleg implements OnInit {
   foto = signal<string | null>(null);
   zeigeFormular = signal(false);
 
+  minDatum = '2020-01-01';
+  maxDatum = new Date().toISOString().slice(0, 10);
+
   form = this.fb.nonNullable.group({
     rechnungssteller: ['', Validators.required],
     betrag: [0, [Validators.required, Validators.min(0)]],

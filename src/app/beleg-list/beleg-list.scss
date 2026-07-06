@@ -1,7 +1,44 @@
-.fab {
+.liste {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px 88px;
+}
+
+.beleg-card {
+  cursor: pointer;
+}
+
+.beleg-inhalt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.beleg-titel {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.beleg-datum {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.beleg-betrag {
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.neuer-beleg {
   position: fixed;
+  left: 16px;
   right: 16px;
   bottom: 16px;
+  height: 48px;
+  font-size: 1rem;
 }
 
 .leer {

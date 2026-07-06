@@ -26,7 +26,7 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Datum</mat-label>
-      <input matInput type="date" formControlName="datum" required />
+      <input matInput type="date" formControlName="datum" [min]="minDatum" [max]="maxDatum" required />
       @if (form.controls.datum.hasError('required')) {
         <mat-error>Datum ist erforderlich</mat-error>
       }

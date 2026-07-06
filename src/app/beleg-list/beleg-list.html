@@ -1,18 +1,23 @@
 <mat-toolbar color="primary">Belege</mat-toolbar>
 
 @if (belege().length === 0) {
-<p class="leer">Noch keine Belege — tippe auf „＋", um deinen ersten Beleg zu scannen.</p>
+<p class="leer">Noch keine Belege — tippe auf „Neuen Beleg erstellen", um deinen ersten Beleg zu scannen.</p>
 } @else {
-<mat-nav-list>
+<div class="liste">
 @for (beleg of belege(); track beleg._id) {
-<a mat-list-item [routerLink]="['/beleg', beleg._id]">
-  <span matListItemTitle>{{ beleg.rechnungssteller }}</span>
-  <span matListItemLine>{{ beleg.betrag }} € — {{ beleg.datum | date:'dd.MM.yyyy' }}</span>
-</a>
+<mat-card class="beleg-card" [routerLink]="['/beleg', beleg._id]">
+  <mat-card-content class="beleg-inhalt">
+    <div>
+      <div class="beleg-titel">{{ beleg.rechnungssteller }}</div>
+      <div class="beleg-datum">{{ beleg.datum | date:'dd.MM.yyyy' }}</div>
+    </div>
+    <div class="beleg-betrag">{{ beleg.betrag }} €</div>
+  </mat-card-content>
+</mat-card>
 }
-</mat-nav-list>
+</div>
 }
 
-<button matFab class="fab" routerLink="/neu" aria-label="Beleg scannen">
-  <mat-icon>add</mat-icon>
+<button matButton="filled" class="neuer-beleg" routerLink="/neu">
+  Neuen Beleg erstellen
 </button>

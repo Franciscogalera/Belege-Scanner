@@ -2,14 +2,13 @@ import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/cor
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { BelegeService } from '../services/belege.service';
 
 @Component({
   selector: 'app-beleg-list',
-  imports: [RouterLink, DatePipe, MatToolbarModule, MatListModule, MatButtonModule, MatIconModule],
+  imports: [RouterLink, DatePipe, MatToolbarModule, MatCardModule, MatButtonModule],
   templateUrl: './beleg-list.html',
   styleUrl: './beleg-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

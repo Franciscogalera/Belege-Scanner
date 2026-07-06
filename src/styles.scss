@@ -7,6 +7,7 @@
 
 html {
   height: 100%;
+  color-scheme: light;
   @include mat.theme(
     (
       color: (
@@ -23,7 +24,7 @@ body {
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
   // user's system settings.
-  color-scheme: light dark;
+  color-scheme: light;
 
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
@@ -42,5 +43,12 @@ body {
   @include mat.snack-bar-overrides((
     container-color: #c62828,
     supporting-text-color: #ffffff,
+  ));
+}
+
+mat-toolbar {
+  @include mat.toolbar-overrides((
+    container-background-color: var(--mat-sys-primary),
+    container-text-color: var(--mat-sys-on-primary),
   ));
 }
