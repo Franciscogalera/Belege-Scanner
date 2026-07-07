@@ -47,8 +47,8 @@ export class Kamera implements OnDestroy {
     if (!video || !canvas) {
       return;
     }
-    const maxBreite = 1000;
-    const skala = Math.min(1, maxBreite / video.videoWidth);
+
+    const skala = Math.min(1, 1000 / video.videoWidth);
     canvas.width = video.videoWidth * skala;
     canvas.height = video.videoHeight * skala;
     canvas.getContext('2d')?.drawImage(video, 0, 0, canvas.width, canvas.height);

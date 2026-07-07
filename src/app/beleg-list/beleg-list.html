@@ -1,21 +1,36 @@
-<mat-toolbar color="primary">Belege</mat-toolbar>
+<mat-toolbar>Belege</mat-toolbar>
 
 @if (belege().length === 0) {
-<p class="leer">Noch keine Belege — tippe auf „Neuen Beleg erstellen", um deinen ersten Beleg zu scannen.</p>
+  <p class="leer">Keine Belege vorhanden.</p>
 } @else {
-<div class="liste">
-@for (beleg of belege(); track beleg._id) {
-<mat-card class="beleg-card" [routerLink]="['/beleg', beleg._id]">
-  <mat-card-content class="beleg-inhalt">
-    <div>
-      <div class="beleg-titel">{{ beleg.rechnungssteller }}</div>
-      <div class="beleg-datum">{{ beleg.datum | date:'dd.MM.yyyy' }}</div>
+  <mat-form-field class="jahr-auswahl">
+    <mat-label>Belege vom Jahr</mat-label>
+    <mat-select [value]="selectedYear()" (selectionChange)="selectedYear.set($event.value)">
+      @for (year of years(); track year) {
+        <mat-option [value]="year">{{ year }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-divider />
+
+  @if (gefilterteBelege().length === 0) {
+    <p class="leer">Keine Belege in {{ selectedYear() }}.</p>
+  } @else {
+    <div class="liste">
+      @for (beleg of gefilterteBelege(); track beleg._id) {
+        <mat-card class="beleg-card" [routerLink]="['/beleg', beleg._id]">
+          <mat-card-content class="beleg-inhalt">
+            <div>
+              <div class="beleg-titel">{{ beleg.rechnungssteller }}</div>
+              <div class="beleg-datum">{{ beleg.datum | date:'dd.MM.yyyy' }}</div>
+            </div>
+            <div class="beleg-betrag">{{ beleg.betrag }} €</div>
+          </mat-card-content>
+        </mat-card>
+      }
     </div>
-    <div class="beleg-betrag">{{ beleg.betrag }} €</div>
-  </mat-card-content>
-</mat-card>
-}
-</div>
+  }
 }
 
 <button matButton="filled" class="neuer-beleg" routerLink="/neu">

@@ -9,6 +9,12 @@
 .kamera video {
   width: 100%;
   max-width: 500px;
+  aspect-ratio: 3 / 4;
   border-radius: 8px;
   background: #000;
+}
+
+.foto-button {
+  height: 48px;
+  font-size: 1rem;
 }

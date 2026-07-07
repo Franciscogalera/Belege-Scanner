@@ -1,3 +1,9 @@
+.jahr-auswahl {
+  display: block;
+  width: calc(100% - 32px);
+  margin: 16px 16px 0;
+}
+
 .liste {
   display: flex;
   flex-direction: column;
