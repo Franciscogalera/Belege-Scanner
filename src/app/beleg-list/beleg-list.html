@@ -24,12 +24,17 @@
             <div>
               <div class="beleg-titel">{{ beleg.rechnungssteller }}</div>
               <div class="beleg-datum">{{ beleg.datum | date:'dd.MM.yyyy' }}</div>
+              <div class="beleg-kategorie">{{ beleg.kategorie ?? 'Sonstiges' }}</div>
             </div>
             <div class="beleg-betrag">{{ beleg.betrag }} €</div>
           </mat-card-content>
         </mat-card>
       }
+      <button matButton (click)="exportCsv()" class="csv-button">
+        Als CSV exportieren
+      </button>
     </div>
+
   }
 }
 

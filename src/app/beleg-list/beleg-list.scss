@@ -32,6 +32,11 @@
   opacity: 0.7;
 }
 
+.beleg-kategorie {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
 .beleg-betrag {
   font-size: 1rem;
   font-weight: 500;
@@ -50,4 +55,8 @@
 .leer {
   padding: 24px;
   text-align: center;
+}
+
+.csv-button {
+  margin: 0 16px;
 }

@@ -5,8 +5,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatOption, MatSelect, MatSelectModule} from '@angular/material/select';
 import {Kamera} from '../kamera/kamera';
 import {BelegeService} from '../services/belege.service';
+import {KATEGORIEN} from '../models/beleg.model';
 import {MatDialog} from '@angular/material/dialog';
 import {LoeschDialog} from './loesch-dialog';
 import {MatIcon} from '@angular/material/icon';
@@ -14,7 +16,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-beleg',
-  imports: [ReactiveFormsModule, RouterLink, MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, Kamera, MatIcon],
+  imports: [ReactiveFormsModule, RouterLink, MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, Kamera, MatIcon, MatSelect, MatOption],
   templateUrl: './beleg.html',
   styleUrl: './beleg.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,11 +36,14 @@ export class Beleg implements OnInit {
   minDatum = '2020-01-01';
   maxDatum = new Date().toISOString().slice(0, 10);
 
+  kategorien = KATEGORIEN;
+
   form = this.fb.nonNullable.group({
     rechnungssteller: ['', Validators.required],
     betrag: [0, [Validators.required, Validators.min(0)]],
     datum: ['', Validators.required],
     mwst: [19],
+    kategorie: ['Sonstiges'],
   });
 
   ngOnInit() {

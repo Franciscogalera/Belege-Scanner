@@ -37,6 +37,15 @@
       <input matInput type="number" formControlName="mwst" />
     </mat-form-field>
 
+    <mat-form-field appearance="outline">
+      <mat-label>Kategorie</mat-label>
+      <mat-select formControlName="kategorie">
+        @for (kat of kategorien; track kat) {
+          <mat-option [value]="kat">{{ kat }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
     <div class="aktionen">
         @if (id()) {
           <button matButton (click)="loeschen()" type="button" style="color: var(--mat-sys-error)">

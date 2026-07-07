@@ -33,4 +33,23 @@ export class BelegList implements OnInit {
   ngOnInit() {
     this.service.laden();
   }
+
+  exportCsv() {
+    const header = 'Rechnungssteller;Betrag;MwSt;Datum;Kategorie';
+    const rows = this.gefilterteBelege().map(b => {
+      const mwstSatz = b.mwst ?? 19;
+      const mwstBetrag = (b.betrag * mwstSatz / (100 + mwstSatz)).toFixed(2).replace('.', ',');
+      const betrag = String(b.betrag).replace('.', ',');
+      return `${b.rechnungssteller};${betrag};${mwstBetrag};${b.datum}; ${b.kategorie ?? 'Sonstiges'}`;
+    });
+    const csv = [header, ...rows].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `belege-${this.selectedYear()}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
 }
