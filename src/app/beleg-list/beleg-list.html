@@ -1,6 +1,8 @@
 <mat-toolbar>Belege</mat-toolbar>
 
-@if (belege().length === 0) {
+@if (ladeFehler()) {
+  <p class="leer fehler"><mat-icon>warning</mat-icon> Belege konnten nicht geladen werden.</p>
+} @else if (belege().length === 0) {
   <p class="leer">Keine Belege vorhanden.</p>
 } @else {
   <mat-form-field class="jahr-auswahl">

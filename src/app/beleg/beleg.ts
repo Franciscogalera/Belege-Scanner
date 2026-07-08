@@ -5,7 +5,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import {MatOption, MatSelect, MatSelectModule} from '@angular/material/select';
+import {MatOption, MatSelect} from '@angular/material/select';
 import {Kamera} from '../kamera/kamera';
 import {BelegeService} from '../services/belege.service';
 import {KATEGORIEN} from '../models/beleg.model';
@@ -73,10 +73,10 @@ export class Beleg implements OnInit {
     }
     const beleg = {...this.form.getRawValue(), foto: this.foto() ?? undefined};
     const id = this.id();
-    const anfrage = id ? this.service.aendern(id, beleg) : this.service.anlegen(beleg);
+    const anfrage = id ? this.service.editBeleg(id, beleg) : this.service.addBeleg(beleg);
     anfrage.subscribe({
       next: () => {
-        this.service.laden();
+        this.service.loadBelege();
         this.snackBar.open('Beleg gespeichert', undefined, { duration: 3000 });
         this.router.navigate(['/']);
       },
@@ -98,9 +98,9 @@ export class Beleg implements OnInit {
     });
     ref.afterClosed().subscribe(bestaetigt => {
       if (bestaetigt) {
-        this.service.loeschen(id).subscribe({
+        this.service.deleteBeleg(id).subscribe({
           next: () => {
-            this.service.laden();
+            this.service.loadBelege();
             this.snackBar.open('Beleg gelöscht', undefined, { duration: 3000 });
             this.router.navigate(['/']);
           },
