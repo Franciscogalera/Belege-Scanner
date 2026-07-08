@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { BelegeService } from '../services/belege.service';
 import {MatFormField, MatLabel} from '@angular/material/input';
 import {MatOption, MatSelect} from '@angular/material/select';
@@ -11,7 +12,7 @@ import {MatDivider} from '@angular/material/list';
 
 @Component({
   selector: 'app-beleg-list',
-  imports: [RouterLink, DatePipe, MatToolbarModule, MatCardModule, MatButtonModule, MatFormField, MatLabel, MatSelect, MatOption, MatDivider],
+  imports: [RouterLink, DatePipe, MatToolbarModule, MatCardModule, MatButtonModule, MatIcon, MatFormField, MatLabel, MatSelect, MatOption, MatDivider],
   templateUrl: './beleg-list.html',
   styleUrl: './beleg-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,6 +20,7 @@ import {MatDivider} from '@angular/material/list';
 export class BelegList implements OnInit {
   private service = inject(BelegeService);
   belege = this.service.belege;
+  ladeFehler = this.service.ladeFehler;
   selectedYear = signal(String(new Date().getFullYear()));
   years = computed(() => {
     const jahre = new Set(this.belege().map(b => b.datum.slice(0, 4)));
@@ -31,7 +33,7 @@ export class BelegList implements OnInit {
   );
 
   ngOnInit() {
-    this.service.laden();
+    this.service.loadBelege();
   }
 
   exportCsv() {
@@ -40,7 +42,7 @@ export class BelegList implements OnInit {
       const mwstSatz = b.mwst ?? 19;
       const mwstBetrag = (b.betrag * mwstSatz / (100 + mwstSatz)).toFixed(2).replace('.', ',');
       const betrag = String(b.betrag).replace('.', ',');
-      return `${b.rechnungssteller};${betrag};${mwstBetrag};${b.datum}; ${b.kategorie ?? 'Sonstiges'}`;
+      return `${b.rechnungssteller};${betrag};${mwstBetrag};${b.datum};${b.kategorie ?? 'Sonstiges'}`;
     });
     const csv = [header, ...rows].join('\n');
 
