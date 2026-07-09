@@ -1,6 +1,6 @@
 const https = require('https');
 const fs = require('fs');
-const { verbinde } = require('./db');
+const { connectDb } = require('./db');
 const { createApp } = require('./app');
 
 const sslOptions = {
@@ -9,7 +9,7 @@ const sslOptions = {
 };
 
 async function start() {
-  await verbinde();
+  await connectDb();
   const app = createApp();
 
   https.createServer(sslOptions, app).listen(443, '0.0.0.0', () => {

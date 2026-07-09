@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb');
 const client = new MongoClient('mongodb://localhost:27017');
 let db;
 
-async function verbinde() {
+async function connectDb() {
   await client.connect();
   db = client.db('belegescanner');
   console.log('MongoDB verbunden');
@@ -14,4 +14,4 @@ function getDb() {
   return db;
 }
 
-module.exports = { verbinde, getDb };
+module.exports = { connectDb, getDb };

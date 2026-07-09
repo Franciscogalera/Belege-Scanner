@@ -42,14 +42,14 @@ function createApp() {
 
   app.put('/api/belege/:id', async (req, res) => {
     const belegId = new ObjectId(req.params.id);
-    const aenderungen = req.body;
+    const geaenderterBeleg = req.body;
     const ergebnis = await getDb().collection('belege').updateOne(
-      { _id: belegId }, { $set: aenderungen }
+      { _id: belegId }, { $set: geaenderterBeleg }
     );
     if (ergebnis.matchedCount === 0) {
       res.status(404).json({ error: 'Beleg nicht gefunden' });
     } else {
-      res.status(200).json({ _id: req.params.id, ...aenderungen });
+      res.status(200).json({ _id: req.params.id, ...geaenderterBeleg });
     }
   });
 

@@ -1,59 +1,48 @@
-# BelegeScanner
+# Belege-Scanner
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.17.
+Eine PWA zur Erfassung von Belegen für die Steuererklärung.
 
-## Development server
+## Zweck
 
-To start a local development server, run:
+Als Vorarbeit für die Steuer muss man jedes Jahr alle Rechnungen durchgehen und in eine
+Excel-Liste eintragen (Name, Betrag, Datum, MwSt, Kategorie). Das ist sehr zeitaufwendig.
+Mit der App fotografiert man einen Beleg, erfasst die Daten und kann am Ende das
+jeweilige Jahr als CSV-Datei exportieren. 
+
+## PWA/Web-API
+Die App lässt sich auf dem Desktop oder Mobilgerät installieren und ist teilweise auch offline nutzbar. 
+Der Service Worker cashed dabei die App-Shell, so dass die App auch ohne Intenetverbindung startet und bereits geladene Belege sichtbar sind.
+Der Kamerazugriff läuft über die Browser Web-API. Es wird ein Videostream angezeigt und daraus ein Foto generiert.
+
+## Tech-Stack
+Frontend: Angular & Angular Material
+Backend: Node.js/ExpressJs
+Datenbank: MongoDB
+
+## Lokal starten
+
+Voraussetzung: Node.js, MongoDB
+
+Backend:
 
 ```bash
+cd backend
+npm install
+node server_local.js
+```
+
+BE läuft dann auf http://localhost:4000.
+
+Frontend:
+
+```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+FE läuft auf http://localhost:4200. Die API-Aufrufe werden über `proxy.conf.json` an das
+Backend auf Port 4000 weitergeleitet.
 
-## Code scaffolding
+## Liveansicht
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+https://lyra.hs-emden-leer.de:20205/ (kein Login nötig)
