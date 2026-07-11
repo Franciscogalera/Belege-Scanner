@@ -1,5 +1,11 @@
 
 
+@if (updateVerfuegbar()) {
+  <div class="update-banner">
+    Neue Version verfügbar
+    <button class="update-button" (click)="neuLaden()">Neu laden</button>
+  </div>
+}
 @if (!isOnline()) {
   <div class="offline-banner">Offline – du siehst gespeicherte Daten</div>
 }

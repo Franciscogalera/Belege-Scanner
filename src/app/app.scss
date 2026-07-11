@@ -1,7 +1,28 @@
 .offline-banner {
   padding: 0.5rem 1rem;
-  background: var(--mat-sys-error);
-  color: var(--mat-sys-on-error);
+  background: red;
+  color: white;
   text-align: center;
   font-size: 1rem;
+}
+
+.update-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0.5rem 1rem;
+  background: #1565c0;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.update-button {
+  background: #ffffff;
+  color: #1565c0;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
