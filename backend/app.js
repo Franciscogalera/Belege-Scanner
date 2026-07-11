@@ -53,6 +53,8 @@ function createApp() {
     }
   });
 
+  require('./extract').register(app);
+
   app.use(express.static(FRONTEND));
 
   app.use((req, res) => {

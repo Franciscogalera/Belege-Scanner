@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node server_express.js",
-    "local": "node server_local.js"
+    "local": "node --env-file=.env server_local.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "express": "^5.2.1",
     "mongodb": "^7.3.0"
   }

@@ -35,3 +35,10 @@ input[type="date"]::-webkit-date-and-time-value {
   margin: 16px auto 0;
   border-radius: 8px;
 }
+
+.auslesen-button {
+  display: block;
+  width: calc(100% - 32px);
+  height: 48px;
+  margin: 8px 16px 0;
+}

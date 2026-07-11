@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatOption, MatSelect} from '@angular/material/select';
 import {Kamera} from '../kamera/kamera';
 import {BelegeService} from '../services/belege.service';
+import {ExtractService} from '../services/extract.service';
 import {KATEGORIEN} from '../models/beleg.model';
 import {MatDialog} from '@angular/material/dialog';
 import {LoeschDialog} from './loesch-dialog';
@@ -27,11 +28,13 @@ export class Beleg implements OnInit {
   private router = inject(Router);
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
+  private extractService = inject(ExtractService);
 
   id = input<string>();
 
   foto = signal<string | null>(null);
   zeigeFormular = signal(false);
+  wirdAusgelesen = signal(false);
 
   minDatum = '2020-01-01';
   maxDatum = new Date().toISOString().slice(0, 10);
@@ -64,6 +67,25 @@ export class Beleg implements OnInit {
 
   weiterOhneFoto() {
     this.zeigeFormular.set(true);
+  }
+
+  auslesen() {
+    const foto = this.foto();
+    if (!foto) {
+      return;
+    }
+    this.wirdAusgelesen.set(true);
+    this.extractService.extract(foto).subscribe({
+      next: daten => {
+        this.form.patchValue(daten);
+        this.wirdAusgelesen.set(false);
+        this.snackBar.open('Beleg ausgelesen', undefined, { duration: 3000 });
+      },
+      error: () => {
+        this.wirdAusgelesen.set(false);
+        this.snackBar.open('Auslesen fehlgeschlagen. Bitte manuell erfassen', undefined, { duration: 3000 });
+      },
+    });
   }
 
   speichern() {

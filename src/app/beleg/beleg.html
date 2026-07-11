@@ -3,6 +3,9 @@
 @if (zeigeFormular()) {
   @if (foto()) {
     <img [src]="foto()" class="vorschau" alt="Belegfoto" />
+    <button matButton type="button" class="auslesen-button" (click)="auslesen()" [disabled]="wirdAusgelesen()">
+      {{ wirdAusgelesen() ? 'Wird ausgelesen…' : 'Beleg automatisch auslesen' }}
+    </button>
   }
   <form [formGroup]="form" (ngSubmit)="speichern()" class="formular">
     <mat-form-field appearance="outline">
