@@ -1,0 +1,15 @@
+Zugang zur App
+
+Aufruf: https://lyra.hs-emden-leer.de:20205/
+
+Login ist nicht erforderlich.
+
+Github-repo: https://github.com/Franciscogalera/Belege-Scanner
+
+
+Bedienung:
+1. Neuer Beleg" antippen
+2. Foto aufnehmen
+3. Automatisch auslesen lassen oder Felder ausfuellen und speichern
+
+Die App ist über auf dem Desktop und Handy als PWA installierbar.

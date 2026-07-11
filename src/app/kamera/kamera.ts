@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class Kamera implements OnDestroy {
   fotoAufgenommen = output<string>();
   abgebrochen = output<void>();
+  verlassen = output<void>();
 
   private video = viewChild<ElementRef<HTMLVideoElement>>('video');
   private canvas = viewChild<ElementRef<HTMLCanvasElement>>('canvas');

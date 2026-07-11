@@ -3,6 +3,7 @@
   <button matButton="filled" class="foto-button" (click)="aufnehmen()">
     <mat-icon>photo_camera</mat-icon> Beleg fotografieren
   </button>
+  <button matButton (click)="verlassen.emit()">Abbrechen</button>
 </div>
 
 <canvas #canvas hidden></canvas>

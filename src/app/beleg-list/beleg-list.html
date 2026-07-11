@@ -1,10 +1,6 @@
 <mat-toolbar>Belege</mat-toolbar>
 
-@if (ladeFehler()) {
-  <p class="leer fehler"><mat-icon>warning</mat-icon> Belege konnten nicht geladen werden.</p>
-} @else if (belege().length === 0) {
-  <p class="leer">Keine Belege vorhanden.</p>
-} @else {
+@if (belege().length > 0) {
   <mat-form-field class="jahr-auswahl">
     <mat-label>Belege vom Jahr</mat-label>
     <mat-select [value]="selectedYear()" (selectionChange)="selectedYear.set($event.value)">
@@ -38,6 +34,10 @@
     </div>
 
   }
+} @else if (ladeFehler()) {
+  <p class="leer fehler"><mat-icon>warning</mat-icon> Belege konnten nicht geladen werden.</p>
+} @else {
+  <p class="leer">Keine Belege vorhanden.</p>
 }
 
 <button matButton="filled" class="neuer-beleg" routerLink="/neu">

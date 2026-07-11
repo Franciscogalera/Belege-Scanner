@@ -95,6 +95,10 @@ export class Beleg implements OnInit {
     });
   }
 
+  abbrechen() {
+    this.router.navigate(['/']);
+  }
+
   speichern() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();

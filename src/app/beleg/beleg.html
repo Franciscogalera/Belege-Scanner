@@ -60,5 +60,8 @@
     </div>
   </form>
 } @else {
-  <app-kamera (fotoAufgenommen)="fotoGesetzt($event)" (abgebrochen)="weiterOhneFoto()" />
+  <app-kamera
+    (fotoAufgenommen)="fotoGesetzt($event)"
+    (abgebrochen)="weiterOhneFoto()"
+    (verlassen)="abbrechen()" />
 }
