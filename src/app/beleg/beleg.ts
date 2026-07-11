@@ -53,10 +53,17 @@ export class Beleg implements OnInit {
     const id = this.id();
     if (id) {
       this.zeigeFormular.set(true);
-      this.service.getBeleg(id).subscribe(beleg => {
-        this.form.patchValue(beleg);
-        this.foto.set(beleg.foto ?? null);
-      });
+
+      const gecachterBeleg = this.service.belege().find(b => b._id === id);
+      if (gecachterBeleg) {
+        this.form.patchValue(gecachterBeleg);
+        this.foto.set(gecachterBeleg.foto ?? null);
+      } else {
+        this.service.getBeleg(id).subscribe(beleg => {
+          this.form.patchValue(beleg);
+          this.foto.set(beleg.foto ?? null);
+        });
+      }
     }
   }
 
