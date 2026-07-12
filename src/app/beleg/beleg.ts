@@ -106,8 +106,8 @@ export class Beleg implements OnInit {
     }
     const beleg = {...this.form.getRawValue(), foto: this.foto() ?? undefined};
     const id = this.id();
-    const anfrage = id ? this.service.editBeleg(id, beleg) : this.service.addBeleg(beleg);
-    anfrage.subscribe({
+    const saveRequest = id ? this.service.editBeleg(id, beleg) : this.service.addBeleg(beleg);
+    saveRequest.subscribe({
       next: () => {
         this.service.loadBelege();
         this.snackBar.open('Beleg gespeichert', undefined, { duration: 3000 });

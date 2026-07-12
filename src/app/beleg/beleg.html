@@ -1,11 +1,14 @@
 <mat-toolbar>{{ id() ? 'Beleg bearbeiten' : 'Neuen Beleg anlegen' }}</mat-toolbar>
 
 @if (zeigeFormular()) {
+  <div class="beleg-inhalt">
   @if (foto()) {
-    <img [src]="foto()" class="vorschau" alt="Belegfoto" />
-    <button matButton type="button" class="auslesen-button" (click)="auslesen()" [disabled]="wirdAusgelesen()">
-      {{ wirdAusgelesen() ? 'Wird ausgelesen…' : 'Beleg automatisch auslesen' }}
-    </button>
+    <div class="foto-spalte">
+      <img [src]="foto()" class="vorschau" alt="Belegfoto" />
+      <button matButton type="button" class="auslesen-button" (click)="auslesen()" [disabled]="wirdAusgelesen()">
+        {{ wirdAusgelesen() ? 'Wird ausgelesen…' : 'Beleg automatisch auslesen' }}
+      </button>
+    </div>
   }
   <form [formGroup]="form" (ngSubmit)="speichern()" class="formular">
     <mat-form-field appearance="outline">
@@ -59,6 +62,7 @@
       <button matButton="filled" type="submit">Speichern</button>
     </div>
   </form>
+  </div>
 } @else {
   <app-kamera
     (fotoAufgenommen)="fotoGesetzt($event)"

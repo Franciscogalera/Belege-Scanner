@@ -1,8 +1,36 @@
+.beleg-inhalt {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 .formular {
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: 16px;
+}
+
+@media (min-width: 800px) {
+  .beleg-inhalt {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
+    max-width: 960px;
+    padding: 16px 24px;
+  }
+
+  .foto-spalte,
+  .beleg-inhalt .formular {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .foto-spalte {
+    position: sticky;
+    top: 16px;
+  }
 }
 
 .aktionen {
